@@ -165,10 +165,20 @@ function comparar(tarjetasAComparar) {
  */
 function barajaTarjetas(lasTarjetas) {
   let totalTarjetas = lasTarjetas.concat(lasTarjetas);
-  let resultado = totalTarjetas.sort(() => {
-    0.5 - Math.random();
-  });
-  return resultado;
+  let currentIndex = totalTarjetas.length;
+  console.log(currentIndex);
+
+  while (currentIndex !== 0) {
+    let randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [totalTarjetas[currentIndex], totalTarjetas[randomIndex]] = [
+      totalTarjetas[randomIndex],
+      totalTarjetas[currentIndex],
+    ];
+  }
+  console.log(totalTarjetas);
+  return totalTarjetas;
 }
 
 /**
@@ -354,9 +364,8 @@ function subeNivel() {
  * @global
  */
 function actualizaNivel() {
-  console.log('actualizaNivel()')
+  console.log('actualizaNivel()');
   let nivelTexto = nivelActual + 1;
-  console.log(nivelTexto);
 
   if (nivelTexto < 10) {
     nivelTexto = `0 ${nivelTexto}`;
@@ -413,7 +422,7 @@ function escribeNiveles() {
     controlNivel.innerHTML = `
     <button class='nivel' data-nivel=${indice}>
       Nivel ${indice + 1}
-    </button>"
+    </button>
     `;
     menuNiveles.appendChild(controlNivel);
   });
@@ -426,13 +435,11 @@ function escribeNiveles() {
  * @global
  */
 function cambiaNivel(evento) {
+  console.log('Funcion cambiaNivel()');
   evento.stopPropagation();
-  console.log('inicia Evento');
-  // console.log('evento', evento);
-  console.log('this', this);
 
   let nivel = parseInt(this.dataset.nivel);
-  if(nivel >= 0 && nivel < niveles.length) {
+  if (nivel >= 0 && nivel < niveles.length) {
     nivelActual = nivel;
     actualizaNivel();
     iniciar();
@@ -446,6 +453,7 @@ function cambiaNivel(evento) {
  * @global
  */
 function muestraMenuNiveles(evento) {
+  console.log(' muestraMenuNiveles()');
   evento.stopPropagation();
   document.querySelector('.selecciona-nivel').classList.toggle('visible');
 }
@@ -456,6 +464,7 @@ function muestraMenuNiveles(evento) {
  * @global
  */
 function ocultaMenuNiveles() {
+  console.log('ocultaMenuNiveles()');
   document.querySelector('.selecciona-nivel').classList.remove('visible');
 }
 
