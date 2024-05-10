@@ -164,9 +164,9 @@ function comparar(tarjetasAComparar) {
  * @global
  */
 function barajaTarjetas(lasTarjetas) {
+  console.log('barajaTarjetas()')
   let totalTarjetas = lasTarjetas.concat(lasTarjetas);
   let currentIndex = totalTarjetas.length;
-  console.log(currentIndex);
 
   while (currentIndex !== 0) {
     let randomIndex = Math.floor(Math.random() * currentIndex);
@@ -176,8 +176,7 @@ function barajaTarjetas(lasTarjetas) {
       totalTarjetas[randomIndex],
       totalTarjetas[currentIndex],
     ];
-  }
-  console.log(totalTarjetas);
+  };
   return totalTarjetas;
 }
 
