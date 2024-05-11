@@ -164,7 +164,7 @@ function comparar(tarjetasAComparar) {
  * @global
  */
 function barajaTarjetas(lasTarjetas) {
-  console.log('barajaTarjetas()')
+  console.log('barajaTarjetas()');
   let totalTarjetas = lasTarjetas.concat(lasTarjetas);
   let currentIndex = totalTarjetas.length;
 
@@ -176,7 +176,7 @@ function barajaTarjetas(lasTarjetas) {
       totalTarjetas[randomIndex],
       totalTarjetas[currentIndex],
     ];
-  };
+  }
   return totalTarjetas;
 }
 
@@ -584,7 +584,6 @@ document
   .addEventListener('click', ocultaMenuNiveles);
 
 document.querySelectorAll('.nivel').forEach((element) => {
-  console.log('element', element);
   element.addEventListener('click', cambiaNivel);
 });
 
