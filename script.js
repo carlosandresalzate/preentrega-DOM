@@ -159,7 +159,7 @@ function comparar(tarjetasAComparar) {
 // #region baraja reparte
 
 /**
- * @brief Baraja un conjunto de tarjetas.
+ * @brief Baraja un conjunto de tarjetas utilizando el algoritmo de Fisher-Yates.
  * @function barajaTarjetas
  * @param {Array<string>} lasTarjetas - las tarjetas a barajar.
  * @returns {Array<string>} - El conjunto de tarjetas barajadas.
@@ -360,12 +360,20 @@ function subeNivel() {
 }
 
 /**
- * @brief Actualiza el numero de nivel actual en la interfaz.
+ * @brief Actualiza el numero de nivel actual en la interfaz y guarda el progreso en el localStorage.
+ *
+ * Esta función actualiza el número de nivel actual en la interfaz de usuario y guarda el progreso del juego,
+ * incluyendo el nivel actual, los movimientos totales y el número máximo de movimientos permitidos para ese nivel,
+ * en el localStorage para mantener el estado del juego entre sesiones.
+ *
  * @function actualizaNivel
  * @global
  */
 function actualizaNivel() {
   console.log('actualizaNivel()');
+
+  guardarEnLocalStorage(nivelActual, movimientos);
+
   let nivelTexto = nivelActual + 1;
 
   if (nivelTexto < 10) {
@@ -558,6 +566,37 @@ function iniciaJuegoRelax() {
   modoRelax = true;
   document.querySelector('#bienvenida').classList.remove('visible');
   iniciar();
+}
+
+// LocalStorage
+// #region LocalStorage
+
+/**
+ * @brief Guarda el progreso del juego en el localStorage.
+ *
+ * Esta función guarda el progreso del juego, incluyendo el nivel actual, los movimientos totales y el número máximo
+ * de movimientos permitidos para ese nivel, en el localStorage para mantener el estado del juego entre sesiones.
+ *
+ * @function guardarEnLocalStorage
+ * @param {number} nivelActual - El nivel actual del juego.
+ * @param {number} movimientos - El número total de movimientos realizados en el juego.
+ * @global
+ */
+function guardarEnLocalStorage(nivelActual, movimientos) {
+  console.log('Funcion guardarEnLocalStorage(nivelActual, movimientos)');
+  guardarProgreso.nivel = nivelActual;
+  guardarProgreso.movimientosTotales = movimientos;
+
+  for (const nivel in niveles) {
+    if (+nivel === nivelActual) {
+      guardarProgreso.movimientosMax = niveles[nivel].movimientosMax;
+    }
+  }
+
+  const progreso = JSON.stringify(guardarProgreso);
+  console.log(progreso);
+
+  localStorage.setItem('progreso', progreso);
 }
 
 // comienza el juego
