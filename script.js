@@ -92,6 +92,8 @@ let niveles = [
   },
 ];
 
+let guardarProgreso = {};
+
 // Descubrir y comparar
 // #region descubrir y comparar
 /**
